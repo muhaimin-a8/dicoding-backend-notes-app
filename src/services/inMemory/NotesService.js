@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid';
+const { nanoid } = require('nanoid');
 
 class NotesService {
   constructor() {
@@ -16,9 +16,9 @@ class NotesService {
 
     this._notes.push(newNote);
 
-    const isSucess = this._notes.filter((note) => note.id === id).length > 0;
+    const isSuccess = this._notes.filter((note) => note.id === id).length > 0;
 
-    if (!isSucess) {
+    if (!isSuccess) {
       throw new Error('Catatan gagal ditambahkan');
     }
 

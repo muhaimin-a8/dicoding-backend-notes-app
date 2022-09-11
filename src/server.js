@@ -16,8 +16,8 @@ const init = async () => {
 
   await server.register({
     plugin: notes,
-    option: {
-      notesService,
+    options: {
+      service: notesService,
     },
   });
 
