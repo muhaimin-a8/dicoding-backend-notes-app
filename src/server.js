@@ -5,6 +5,9 @@ const Hapi = require('@hapi/hapi');
 const Jwt = require('@hapi/jwt');
 const Inert = require('@hapi/inert');
 
+// cache
+const CacheService = require('./services/redis/CacheService');
+
 // notes
 const notes = require('./api/notes');
 const NotesService = require('./services/postgres/NotesService');
@@ -37,8 +40,9 @@ const StorageService = require('./services/S3/StorageService');
 const UploadsValidator = require('./validator/uploads');
 
 const init = async () => {
-  const collaborationsService = new CollaborationsService();
-  const notesService = new NotesService(collaborationsService);
+  const cacheService = new CacheService();
+  const collaborationsService = new CollaborationsService(cacheService);
+  const notesService = new NotesService(collaborationsService, cacheService);
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
   const storageService = new StorageService();
